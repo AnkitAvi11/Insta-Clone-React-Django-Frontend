@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import { withAlert } from "react-alert";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/auth";
+import Danger from "../../components/Alert";
 
 class Login extends Component {
 
@@ -36,6 +37,7 @@ class Login extends Component {
                             <div className="card-body">
                                 <form onSubmit={this.onFormSubmit}>
                                     <h3>Login</h3>
+                                    {this.props.error ? <Danger message={this.props.error} /> : ''}
                                     <div className="form-group">
                                         <label htmlFor="username">Username</label>
                                         <input type="text" name="username" id="username" className="form-control"
