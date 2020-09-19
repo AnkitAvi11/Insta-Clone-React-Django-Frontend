@@ -3,6 +3,8 @@ import React from 'react';
 import {Link} from 'react-router-dom'
 
 import { withAlert } from "react-alert";
+import { connect } from "react-redux";
+import { loginUser } from "../../actions/auth";
 
 class Login extends Component {
 
@@ -16,7 +18,7 @@ class Login extends Component {
 
     onFormSubmit = (e) => {
         e.preventDefault();
-        //  this.props.alert.show("Login Successful", {type:'success'})
+        this.props.loginUser(this.state.username, this.state.password)
     }
 
     onInputChange = (e) => {
@@ -49,7 +51,7 @@ class Login extends Component {
                                         />
                                     </div>
                                     <div className="form-group">
-                                        <input type="submit" value="Login" 
+                                        <input type="submit" value={this.props.loading ? 'Logging in' : 'Login'} 
                                         className="btn btn-primary" style={{width:"100%"}}
                                         />
                                     </div>
@@ -66,5 +68,14 @@ class Login extends Component {
     }
 }
 
-export default withAlert()(Login);
+const mapStateToProps = (state) => {
+    return {
+        loading : state.auth.loading,
+        error : state.auth.error,
+        token : state.auth.token,
+        user : state.auth.user
+    }
+}
+
+export default withAlert()(connect(mapStateToProps,{loginUser:loginUser})(Login));
 

@@ -7,12 +7,16 @@ import NotFound from './components/Notfound';
 import Login from './containers/auth/login';
 import Signup from './containers/auth/Signup';
 
+import { createBrowserHistory } from "history";
+
+export const history = createBrowserHistory();    
+
 class App extends React.Component {
     
     render()
     {
         return (
-            <BrowserRouter>
+            <BrowserRouter history={history}>
                 <div>
                     <Nav/>                    
                 </div>
