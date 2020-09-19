@@ -2,6 +2,8 @@ import { Component } from "react";
 import React from 'react';
 import {Link} from 'react-router-dom'
 
+import { withAlert } from "react-alert";
+
 class Login extends Component {
 
     constructor() {
@@ -14,6 +16,7 @@ class Login extends Component {
 
     onFormSubmit = (e) => {
         e.preventDefault();
+        //  this.props.alert.show("Login Successful", {type:'success'})
     }
 
     onInputChange = (e) => {
@@ -63,5 +66,5 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default withAlert()(Login);
 
