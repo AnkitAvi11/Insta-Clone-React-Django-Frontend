@@ -1,22 +1,28 @@
 import React from 'react';
 
 import Nav from './components/nav';
-import { Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch, Redirect } from "react-router-dom";
 
 import NotFound from './components/Notfound';
 import Login from './containers/auth/login';
 import Signup from './containers/auth/Signup';
 import { connect } from "react-redux";
 
-// import { createBrowserHistory } from "history";
-// export const history = createBrowserHistory();
+import PrivateRoute from './components/PrivateRoute'
 
 import createHistory from 'history/createBrowserHistory';
 export const history = createHistory();
 
+
+
 const afterLogin = () => {
     return (
-        <h2>After login</h2>
+        <h2>user loggedin</h2>
+    )
+}
+const MyRoute = ()  => {
+    return (
+        <h3>Private hai bhai</h3>
     )
 }
 
@@ -24,7 +30,7 @@ class App extends React.Component {
     
     render()
     {
-        console.log(this.props.user)
+        
         let route = (()=>{
             if(this.props.user === null) {
                 return <Route path="/" exact component={Login} />
@@ -38,8 +44,12 @@ class App extends React.Component {
                     <Nav user={this.props.user} />                    
                     <Switch>
                         {route}
-                        <Route path="/login" component={Login} />
-                        <Route path="/signup" component={Signup} />
+
+                        <Route path="/login" component={(props)=>(this.props.isAuthenticated ? <Redirect to="/"/> : <Login {...props}/>)}/>              
+                        <Route path="/signup" component={(props)=>(this.props.isAuthenticated ? <Redirect to="/"/> : <Signup {...props}/>)}/>       
+                               
+                        <PrivateRoute path="/post" component={MyRoute} isloggedin={this.props.isAuthenticated} />
+
                         <Route component={NotFound} />
                     </Switch>
                 </div>
@@ -52,7 +62,8 @@ const mapStateToProps = (state) => {
     console.log(state);
     return {
         user : state.auth.user,
-        token : state.auth.token
+        token : state.auth.token,
+        isAuthenticated : state.auth.user ? true : false
     }
 }
 

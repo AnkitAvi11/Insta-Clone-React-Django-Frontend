@@ -41,11 +41,11 @@ export const loginUser = (username, password) => {
             method : "POST",
             body : data
         }).then(res => res.json())
-        .then(async data => {
+        .then(data => {
             if (data.status || data.status === 'Error') {
                 throw new Error("Invalid username or password")
             }
-            await dispatch(authSuccess(data))
+            dispatch(authSuccess(data))
             history.push('/');
         }).catch(err => {
             dispatch(authError(err.message))
