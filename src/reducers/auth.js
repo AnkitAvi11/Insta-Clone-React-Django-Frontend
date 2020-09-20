@@ -27,6 +27,12 @@ export const authReducer = (state=initialState, action) => {
                 user : action.payload.auth,
                 token : action.payload.token
             }
+        case 'ERROR_DELETED' : 
+            return {
+                ...state,
+                loading: false,
+                error:null,
+            }
         default : 
             return {
                 ...state

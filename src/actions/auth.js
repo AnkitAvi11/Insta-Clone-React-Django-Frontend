@@ -24,6 +24,13 @@ const authError = (err) => {
     }
 }
 
+const removeError = () => {
+    console.log('remove alert')
+    return {
+        type : 'ERROR_DELETED'
+    }
+}
+
 export const loginUser = (username, password) => {
     return async(dispatch) => {
         await dispatch(authStart());
@@ -34,14 +41,15 @@ export const loginUser = (username, password) => {
             method : "POST",
             body : data
         }).then(res => res.json())
-        .then(data => {
+        .then(async data => {
             if (data.status || data.status === 'Error') {
                 throw new Error("Invalid username or password")
             }
-            dispatch(authSuccess(data))
+            await dispatch(authSuccess(data))
             history.push('/');
         }).catch(err => {
             dispatch(authError(err.message))
+            dispatch(removeError())
         })
     }
 }

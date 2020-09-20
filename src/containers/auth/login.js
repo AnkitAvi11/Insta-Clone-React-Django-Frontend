@@ -5,7 +5,6 @@ import {Link} from 'react-router-dom'
 import { withAlert } from "react-alert";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/auth";
-import Danger from "../../components/Alert";
 
 class Login extends Component {
 
@@ -27,6 +26,12 @@ class Login extends Component {
             [e.target.name] : e.target.value
         })
     }
+    
+    componentDidUpdate = () => {
+        if(this.props.error !== null) {
+            this.props.alert.show('Invalid username or password', {type:'error', timeout: 3000})
+        }
+    }
 
     render () {
         return (
@@ -37,7 +42,6 @@ class Login extends Component {
                             <div className="card-body">
                                 <form onSubmit={this.onFormSubmit}>
                                     <h3>Login</h3>
-                                    {this.props.error ? <Danger message={this.props.error} /> : ''}
                                     <div className="form-group">
                                         <label htmlFor="username">Username</label>
                                         <input type="text" name="username" id="username" className="form-control"

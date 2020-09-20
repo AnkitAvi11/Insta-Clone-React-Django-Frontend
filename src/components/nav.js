@@ -7,7 +7,7 @@ const nav = (props) => {
         <nav className="navbar navbar-expand-md bg-light navbar-light justify-content-center">
     
             <div className="container">
-                <NavLink className="navbar-brand" to="/" activeClassName="active">Devgram</NavLink>
+                <NavLink className="navbar-brand" to="/" exact activeClassName="active">Devgram</NavLink>
 
             
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -18,13 +18,13 @@ const nav = (props) => {
                 <div className="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/login" activeClassName="active">Login</NavLink>
+                            <NavLink className="nav-link" to="/login" exact activeClassName="active">Login</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/signup" activeClassName="active">Signup</NavLink>
+                            <NavLink className="nav-link" to="/signup" exact activeClassName="active">Signup</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink className="nav-link" to="/help" activeClassName="active">Help</NavLink>
+                            <NavLink className="nav-link" to="/help" exact activeClassName="active">Help</NavLink>
                         </li>
                     </ul>
                 </div>
