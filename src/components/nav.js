@@ -13,6 +13,12 @@ const nav = (props) => {
                     </li>
                 </React.Fragment>
 
+    let privateurls = <React.Fragment>
+        <li className="nav-item">
+            <NavLink className="nav-link" to="/post" exact activeClassName="active">Post</NavLink>
+        </li>
+    </React.Fragment>
+
     return (
         <nav className="navbar navbar-expand-md bg-light navbar-light justify-content-center">
     
@@ -28,9 +34,7 @@ const nav = (props) => {
                 <div className="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul className="navbar-nav ml-auto">
                         {props.isauthenticated ? null : authenticationUrls }
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/post" exact activeClassName="active">Post</NavLink>
-                        </li>
+                        {props.isauthenticated ? privateurls : null}
                     </ul>
                 </div>
             </div>

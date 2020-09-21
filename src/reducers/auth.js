@@ -71,6 +71,11 @@ export const signupReducer = (state=initSignupState, action) => {
                 ...state,
                 error : null
             }
+        case 'REMOVE_USER' : 
+            return {
+                ...state,
+                user : null
+            }
         default : 
             return state;
     }

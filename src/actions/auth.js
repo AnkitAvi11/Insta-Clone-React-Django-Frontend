@@ -87,6 +87,12 @@ const removeSignupError = () => {
     }
 }
 
+const removeUser = () => {
+    return {
+        type : 'REMOVE_USER'
+    }
+}
+
 export const signupUser = (username, email, password) => {
     return async(dispatch) => {
         await dispatch(signupStart());
@@ -104,6 +110,7 @@ export const signupUser = (username, email, password) => {
         })
         .then(user => {
             dispatch(signupSuccess(user));
+            dispatch(removeUser());
         }).catch(err => {
             dispatch(signupError(err.message));
             dispatch(removeSignupError())
