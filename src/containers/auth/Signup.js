@@ -1,6 +1,9 @@
 import { Component } from "react";
 import React from 'react';
 import { Link } from "react-router-dom";
+import {connect} from 'react-redux';
+import { signupUser } from "../../actions/auth";
+import { withAlert } from "react-alert";
 
 class Signup extends Component {
 
@@ -15,17 +18,36 @@ class Signup extends Component {
 
     onFormSubmit = (e) => {
         e.preventDefault();
-        if (this.state.username === "" || this.state.email === "" || this.state.password === "") {
-            console.log("Eror")
-        }else{
-            console.log('All good')
-        }
+        if (this.state.email === "")
+            return this.props.alert.show('Enter a valid email address', {type:'error', timeout : 3000})
+        if (this.state.password === "")
+            return this.props.alert.show('Enter a valid password', {type:'error', timeout : 3000})
+        if (this.state.username === "")
+            return this.props.alert.show('Enter a valid username', {type:'error', timeout : 3000})
+
+        this.props.signupUser(this.state.username, this.state.email, this.state.password)
+
+        this.setState({
+            username : '',
+            email : '',
+            password : ''
+        })
+                
     } 
 
     onFormChange = (e) => {
         this.setState({
             [e.target.name] : e.target.value
         })
+    }
+
+    componentDidUpdate = () => {
+        if(this.props.user.error) {
+            return this.props.alert.show('Signup Failed', {type : 'error', timeout : 3000})
+        }
+        if(this.props.user.user) {
+            return this.props.alert.show('Signup Successful. Login to continue.', {type : 'success', timeout : 3000})
+        }
     }
 
     render () {
@@ -60,7 +82,7 @@ class Signup extends Component {
                                         />
                                     </div>
                                     <div className="form-group">
-                                        <input type="submit" value="Signup" className="btn btn-primary" style={{width:"100%"}} />
+                                        <input type="submit" value={this.props.user.loading ? 'Singing up' : 'Signup'} className="btn btn-primary" style={{width:"100%"}} />
                                     </div>
                                     <div className="form-group">
                                         <p>Already have an account ? <Link to="/login">Login</Link></p>
@@ -75,5 +97,12 @@ class Signup extends Component {
     }
 }
 
-export default Signup;
+const mapStateToProps = (state) => {
+    console.log(state.user_created)
+    return {
+        user : state.user_created
+    }
+}
+
+export default withAlert()(connect(mapStateToProps,{signupUser})(Signup));
 

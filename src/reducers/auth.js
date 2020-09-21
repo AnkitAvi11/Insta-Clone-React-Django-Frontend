@@ -1,4 +1,3 @@
-
 let initialState = {
     user : null,
     loading : false,
@@ -37,5 +36,42 @@ export const authReducer = (state=initialState, action) => {
             return {
                 ...state
             }
+    }
+}
+
+const initSignupState = {
+    loading : false, 
+    error : null,
+    user : null
+}
+
+export const signupReducer = (state=initSignupState, action) => {
+    switch(action.type) {
+        case 'SIGNUP_START' : 
+            return {
+                ...state,
+                loading : true
+            }
+        case 'SIGNUP_ERROR' : 
+            return {
+                ...state,
+                loading : false,
+                error : action.payload
+            }
+        case 'SIGNUP_SUCCESS' : 
+            console.log(action.payload);
+            return {
+                ...state,
+                loading: false,
+                error : null,
+                user : action.payload
+            }
+        case 'REMOVE_SUCCESS_ERROR' : 
+            return {
+                ...state,
+                error : null
+            }
+        default : 
+            return state;
     }
 }

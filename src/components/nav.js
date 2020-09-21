@@ -3,6 +3,16 @@ import React from 'react';
 import { NavLink } from "react-router-dom";
 
 const nav = (props) => {
+
+    let authenticationUrls = <React.Fragment>
+                    <li className="nav-item">
+                            <NavLink className="nav-link" to="/login" exact activeClassName="active">Login</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink className="nav-link" to="/signup" exact activeClassName="active">Signup</NavLink>
+                    </li>
+                </React.Fragment>
+
     return (
         <nav className="navbar navbar-expand-md bg-light navbar-light justify-content-center">
     
@@ -17,12 +27,7 @@ const nav = (props) => {
 
                 <div className="collapse navbar-collapse" id="collapsibleNavbar">
                     <ul className="navbar-nav ml-auto">
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/login" exact activeClassName="active">Login</NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/signup" exact activeClassName="active">Signup</NavLink>
-                        </li>
+                        {props.isauthenticated ? null : authenticationUrls }
                         <li className="nav-item">
                             <NavLink className="nav-link" to="/post" exact activeClassName="active">Post</NavLink>
                         </li>

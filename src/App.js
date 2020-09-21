@@ -13,7 +13,8 @@ import PrivateRoute from './components/PrivateRoute'
 import createHistory from 'history/createBrowserHistory';
 export const history = createHistory();
 
-
+//  base url for fetch request
+export const baseUrl = "http://127.0.0.1:8000/";
 
 const afterLogin = () => {
     return (
@@ -30,9 +31,9 @@ class App extends React.Component {
     
     render()
     {
-        
+        console.log(this.props.isAuthenticated)
         let route = (()=>{
-            if(this.props.user === null) {
+            if(!this.props.isAuthenticated) {
                 return <Route path="/" exact component={Login} />
             }else{
                 return <Route path="/" exact component={afterLogin} />
@@ -41,7 +42,7 @@ class App extends React.Component {
         return (
             <Router history={history}>
                 <div>
-                    <Nav user={this.props.user} />                    
+                    <Nav user={this.props.user} isauthenticated={this.props.isAuthenticated} />                    
                     <Switch>
                         {route}
 
@@ -59,11 +60,10 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         user : state.auth.user,
         token : state.auth.token,
-        isAuthenticated : state.auth.user ? true : false
+        isAuthenticated : localStorage.getItem('token') ? true : false
     }
 }
 
