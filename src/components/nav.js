@@ -15,7 +15,10 @@ const nav = (props) => {
 
     let privateurls = <React.Fragment>
         <li className="nav-item">
-            <NavLink className="nav-link" to="/post" exact activeClassName="active">Post</NavLink>
+            <NavLink className="nav-link" to="/post/add" exact activeClassName="active">Add Post <i class="fas fa-plus"></i></NavLink>
+        </li>
+        <li className="nav-item">
+            <NavLink className="nav-link" to="/post/all" exact activeClassName="active">All Post</NavLink>
         </li>
     </React.Fragment>
 
