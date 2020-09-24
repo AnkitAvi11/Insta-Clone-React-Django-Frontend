@@ -20,6 +20,9 @@ const nav = (props) => {
         <li className="nav-item">
             <NavLink className="nav-link" to="/post/all" exact activeClassName="active">All Post</NavLink>
         </li>
+        <li className="nav-item">
+            <NavLink className="nav-link btn btn-danger" to="#" style={{color:'white'}}>Logout</NavLink>
+        </li>
     </React.Fragment>
 
     return (

@@ -6,7 +6,7 @@ import AddPost from './AddPost';
 
 class Posts extends Component {
     render() {
-        console.log(this.props)
+        
         return (
             <Switch>
                 <Route path={`${this.props.match.path}`} exact component={AllPosts} />
