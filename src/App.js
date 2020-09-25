@@ -8,6 +8,7 @@ import Login from './containers/auth/login';
 import Signup from './containers/auth/Signup';
 import { connect } from "react-redux";
 import Posts from "./containers/posts/Posts";
+import AllPosts from './containers/posts/AllPosts';
 
 import PrivateRoute from './components/PrivateRoute'
 
@@ -16,12 +17,6 @@ export const history = createHistory();
 
 //  base url for fetch request
 export const baseUrl = "http://127.0.0.1:8000/";
-
-const afterLogin = () => {
-    return (
-        <h2>user loggedin</h2>
-    )
-}
 
 class App extends React.Component {
     
@@ -32,7 +27,7 @@ class App extends React.Component {
             if(!this.props.isAuthenticated) {
                 return <Route path="/" exact component={Login} />
             }else{
-                return <Route path="/" exact component={afterLogin} />
+                return <Route path="/" exact component={AllPosts} />
             }
         })()
         return (
