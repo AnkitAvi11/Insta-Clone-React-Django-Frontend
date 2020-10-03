@@ -41,7 +41,7 @@ class AllPosts extends Component {
                     </div>
                     <div className="card-body">
                         <div className="d-flex justify-content-between align-items-center">
-                            <a href="#" className="btn btn-success">{post.likes.length} Like  </a>
+                            <p>Posted : {new Date(post.date_posted).toLocaleString()}</p>
                         </div>
                     </div>
                 </div>

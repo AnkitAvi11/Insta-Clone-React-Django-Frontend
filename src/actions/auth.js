@@ -118,3 +118,11 @@ export const signupUser = (username, email, password) => {
         
     }
 }
+
+export const logoutuser = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    return {
+        type : "LOGOUT_USER"
+    }
+}

@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import { logoutuser } from "../actions/auth";
 
 const nav = (props) => {
 
@@ -21,7 +23,7 @@ const nav = (props) => {
             <NavLink className="nav-link" to="/post/all" exact activeClassName="active">All Post</NavLink>
         </li>
         <li className="nav-item">
-            <NavLink className="nav-link btn btn-danger" to="#" style={{color:'white'}}>Logout</NavLink>
+            <NavLink className="nav-link btn btn-danger" to="#" style={{color:'white'}} onClick={props.logoutuser} >Logout</NavLink>
         </li>
     </React.Fragment>
 
@@ -48,4 +50,4 @@ const nav = (props) => {
     )
 }
 
-export default nav;
+export default connect(null, {logoutuser})(nav);
