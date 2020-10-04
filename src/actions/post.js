@@ -26,6 +26,6 @@ const removeError = () => {
 
 export const addPost = (title, pic_url) => {
     return async (dispatch) => {
-
+        
     }
 }
