@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 import Posts from "./containers/posts/Posts";
 import AllPosts from './containers/posts/AllPosts';
 
-import PrivateRoute from './components/PrivateRoute'
+import PrivateRoute from './components/PrivateRoute';
 
 import createHistory from 'history/createBrowserHistory';
 export const history = createHistory();
